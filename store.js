@@ -26,7 +26,6 @@ const STORE = {
       answers: ["Radobaan", "Kulve Taroth", "Odogaron", "Legiana"],
       correctAnswer: "Kulve Taroth"
     }
-
   ],
   currentQuestion: 0,
   score: 0
