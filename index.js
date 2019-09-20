@@ -40,7 +40,7 @@ function questionBuilder(num){ //build HTML from question
     <fieldset>
       <li>question: ${q.question}</li>`
   for (let i = 0; i < q.answers.length; i++){
-    html = html.concat(`  <label class="" for="">
+    html = html.concat(`  <label class="answer" for="">
     <input class="radio" type="radio" id="ans${i}" value="${q.answers[i]}" name="ans" required>
     <span>${q.answers[i]}</span>
   </label>`);
@@ -54,6 +54,7 @@ function questionBuilder(num){ //build HTML from question
 
 function renderMainPage(){
   console.log('renderMainPage')
+  
   renderQuestion(0); //temp
   renderScore();
 }
@@ -96,6 +97,26 @@ function answerBuilder(bool){
 
 function renderEnd(){
   console.log('renderEnd')
+  $('.js-questionNum').remove();
+  $('.js-score').remove();
+  let score = STORE.score;
+  let numQuestions = STORE.questions.length;
+  let html = `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+  <p>You correctly answered ${score} of ${numQuestions} questions</p>`;
+  if (score === numQuestions){
+    html = html.concat('A perfect score!');
+  } else if (score > numQuestions) {
+    html = '<p>Nice try, cheater</p>';
+  } else if (score >= numQuestions * .8){
+    html = html.concat('Good job');
+  } else if (score >= numQuestions * .5){
+    html = html.concat('Not bad');
+  } else if (score < numQuestions * .25){
+    html = html.concat('Worse than chance would suggest. Ouch.');
+  }
+
+  html.concat('button id=\'start-over\'>Start Over</button>')
 }
 
 function handleSubmitQuestionClick(){
@@ -124,12 +145,19 @@ function handleAnswerPageClick() {
     }
   });
 }
+function handleStartOverClick() {
+  $('.js-card').on('click', '#answer-page-button', event => {
+    event.preventDefault();
+    renderMainPage();
+  });
+}
 
 function start(){
   renderMainPage();
   //event handlers
   handleSubmitQuestionClick();
   handleAnswerPageClick();
+  handleRestartClick();
 }
 
 $(start)
