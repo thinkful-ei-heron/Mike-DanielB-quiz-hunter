@@ -1,6 +1,6 @@
 //STORE
 //MODEL = [
-  //Question = {
+  //{
     //question: 'What color is the youtube icon?', 
     //possibleAnswers: ['red', 'green', 'blue', 'purple'],
     //correctAnswer: 'red',
@@ -24,29 +24,40 @@
 //  -tally of questions right and wrong
 //  -element for retake
 //  -
-
+STORE = [
+  {
+    question: 'What color is the youtube icon?', 
+    possibleAnswers: ['red', 'green', 'blue', 'purple'],
+    correctAnswer: 'red',
+    imageAsset: 'url'
+  }
+]
 function questionBuilder(){
-  console.log({'questionBuilder'})
+  console.log('questionBuilder')
+}
+
+function renderMainPage(){
+  console.log('renderMainPage')
 }
 
 function renderQuestion(){
-  console.log({'renderQuestion'})
+  console.log('renderQuestion')
 }
 
 function renderScore(){
-  console.log({'renderScore'})
+  console.log('renderScore')
 }
 
 function storeAnswer(){
-  console.log({'storeAnser'})
+  console.log('storeAnser')
 }
 
 function renderAnswer(){
-  console.log({'renderAnswer'})
+  console.log('renderAnswer')
 }
 
 function renderEnd(){
-  console.log({'renderEnd'})
+  console.log('renderEnd')
 }
 
 function start(){
