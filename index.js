@@ -1,3 +1,5 @@
+/* global STORE */
+'use strict';
 //STORE
 //MODEL = [
   //{
@@ -24,24 +26,41 @@
 //  -tally of questions right and wrong
 //  -element for retake
 //  -
-STORE = [
-  {
-    question: 'What color is the youtube icon?', 
-    possibleAnswers: ['red', 'green', 'blue', 'purple'],
-    correctAnswer: 'red',
-    imageAsset: 'url'
+// STORE = [
+//   {
+//     question: 'What color is the youtube icon?', 
+//     possibleAnswers: ['red', 'green', 'blue', 'purple'],
+//     correctAnswer: 'red',
+//     imageAsset: 'url'
+//   }
+// ]
+function questionBuilder(num){ //build HTML from question
+  let q = STORE.questions[num]
+  let html = `<fieldset>
+  <li>question: ${q.question}</li>`
+  for (let i = 0; i < q.answers.length; i++){
+    html = html.concat(`  <label class="" for="">
+    <input class="radio" type="radio" id="ans${i}" value="" name="" required>
+    <span>${q.answers[i]}</span>
+  </label>`);
   }
-]
-function questionBuilder(){
-  console.log('questionBuilder')
+  html = html.concat(`
+</fieldset>`);
+  return html;
 }
 
 function renderMainPage(){
   console.log('renderMainPage')
 }
 
-function renderQuestion(){
+function renderQuestion(num){
   console.log('renderQuestion')
+  let html = questionBuilder(num);
+  console.log(html);
+  $('card').replaceWith(`<form>
+  ${html}
+</form>`);
+  
 }
 
 function renderScore(){
@@ -49,7 +68,8 @@ function renderScore(){
 }
 
 function storeAnswer(){
-  console.log('storeAnser')
+  console.log('storeAnswer');
+  
 }
 
 function renderAnswer(){
@@ -60,11 +80,14 @@ function renderEnd(){
   console.log('renderEnd')
 }
 
+
+
 function start(){
-  questionBuilder()
-  renderQuestion()
-  renderAnswer()
-  renderEnd()
+  //renderMainPage();
+
+  renderQuestion(0);
+  // renderAnswer()
+  // renderEnd()
 }
 
 $(start)
