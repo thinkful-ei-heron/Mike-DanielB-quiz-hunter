@@ -1,12 +1,24 @@
+@font-face {
+    font-family: 'monster_hunterregular';
+    src: url('font/monster_hunter.woff2') format('woff2'),
+         url('font/monster_hunter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
+body {
+  background: url(images/bg.jpg)
+}
 main {
   position: fixed;
+  text-align: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-.answer {
-  display: block;
+header {
+  padding: 0px;
+  margin: 0px;
 }
 
 button {
@@ -15,4 +27,28 @@ button {
 
 .card {
   background: grey;
+}
+
+.answer {
+  font-family: 'Crimson Text', serif;
+  display: block;
+}
+
+li {
+  font-family: 'Crimson Text', serif;
+  font-size: calc(2vw + .5vw);
+  display: inline;
+  list-style: none;
+	color: white;
+}
+
+h1 {
+  font-family: monster_hunterregular;
+	font-size: calc(7vw + .5vw);
+	color: white;
+  margin: 2px;
+}
+
+input{
+  text-size: 20px;
 }
