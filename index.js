@@ -36,8 +36,9 @@
 // ]
 function questionBuilder(num){ //build HTML from question
   let q = STORE.questions[num]
-  let html = `<fieldset>
-  <li>question: ${q.question}</li>`
+  let html = `<form>
+    <fieldset>
+      <li>question: ${q.question}</li>`
   for (let i = 0; i < q.answers.length; i++){
     html = html.concat(`  <label class="" for="">
     <input class="radio" type="radio" id="ans${i}" value="" name="" required>
@@ -45,7 +46,8 @@ function questionBuilder(num){ //build HTML from question
   </label>`);
   }
   html = html.concat(`
-</fieldset>`);
+  </fieldset>
+</form>`);
   return html;
 }
 
@@ -54,22 +56,25 @@ function renderMainPage(){
 }
 
 function renderQuestion(num){
-  console.log('renderQuestion')
+  //console.log('renderQuestion')
   let html = questionBuilder(num);
-  console.log(html);
-  $('card').replaceWith(`<form>
-  ${html}
-</form>`);
-  
+  //console.log(html);
+  $('.card').html(html);
+  $('.question').text(`Question ${num + 1} of ${STORE.questions.length}`);
+  renderScore();
 }
 
 function renderScore(){
   console.log('renderScore')
+  $('.score').text(STORE.score);
 }
 
-function storeAnswer(){
+function storeAnswer(questionId, ans){ //ans is full answer string
   console.log('storeAnswer');
-  
+  let q = STORE.questions[questionId];
+  if (ans === q.answers[q.correctAnswer]){
+    STORE.score++;
+  }
 }
 
 function renderAnswer(){
@@ -84,7 +89,7 @@ function renderEnd(){
 
 function start(){
   //renderMainPage();
-
+  renderScore();
   renderQuestion(0);
   // renderAnswer()
   // renderEnd()
