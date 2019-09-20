@@ -46,6 +46,7 @@ function questionBuilder(num){ //build HTML from question
   </label>`);
   }
   html = html.concat(`
+    <button>Submit Button Placeholder</button>
   </fieldset>
 </form>`);
   return html;
