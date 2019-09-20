@@ -41,12 +41,12 @@ function questionBuilder(num){ //build HTML from question
       <li>question: ${q.question}</li>`
   for (let i = 0; i < q.answers.length; i++){
     html = html.concat(`  <label class="" for="">
-    <input class="radio" type="radio" id="ans${i}" value="" name="" required>
+    <input class="radio" type="radio" id="ans${i}" value="${q.answers[i]}" name="ans" required>
     <span>${q.answers[i]}</span>
   </label>`);
   }
   html = html.concat(`
-    <button>Submit Button Placeholder</button>
+    <button id='submit-question'>Submit Button Placeholder</button>
   </fieldset>
 </form>`);
   return html;
@@ -54,6 +54,8 @@ function questionBuilder(num){ //build HTML from question
 
 function renderMainPage(){
   console.log('renderMainPage')
+  renderQuestion(0); //temp
+  renderScore();
 }
 
 function renderQuestion(num){
@@ -61,39 +63,73 @@ function renderQuestion(num){
   let html = questionBuilder(num);
   //console.log(html);
   $('.card').html(html);
-  $('.question').text(`Question ${num + 1} of ${STORE.questions.length}`);
+  $('.js-questionNum').text(`Question ${num + 1} of ${STORE.questions.length}`);
   renderScore();
 }
 
 function renderScore(){
-  console.log('renderScore')
-  $('.score').text(STORE.score);
+  // console.log('renderScore')
+  $('.js-score').text(STORE.score);
 }
 
-function storeAnswer(questionId, ans){ //ans is full answer string
-  console.log('storeAnswer');
-  let q = STORE.questions[questionId];
-  if (ans === q.answers[q.correctAnswer]){
-    STORE.score++;
+function checkAnswer(ans){ //ans is full answer string
+  let q = STORE.questions[STORE.currentQuestion];
+  return ans === q.correctAnswer;
+}
+
+function renderAnswer(bool){
+  let html = answerBuilder(bool);
+  $('.card').html(html);
+}
+
+function answerBuilder(bool){
+  let html = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>'
+  if(bool){
+    html = html.concat('<p>YOU\'RE WINNER</p>');
+  } else {
+    html = html.concat('<p>FAILURE</p>');
   }
-}
-
-function renderAnswer(){
-  console.log('renderAnswer')
+  //html = html.concat(`<button id='${STORE.currentQuestion < STORE.questions.length - 1 ? 'next-question' : 'finish-quiz'}'>Submit Button Placeholder</button>`);
+  html = html.concat('<button id=\'answer-page-button\'>Submit Button Placeholder</button>');
+  return html;
 }
 
 function renderEnd(){
   console.log('renderEnd')
 }
 
+function handleSubmitQuestionClick(){
+  $('.js-card').on('click', '#submit-question', event => {
+    // console.log(event);
+    event.preventDefault();
+    let answer = $('.radio:checked').val();
+    if (answer){ //if nothing is checked answer is undefined, which is falsy
+      let success = checkAnswer(answer);
+      if(success){
+        STORE.score++;
+        renderScore();
+      }
+      renderAnswer(success);}
+  });
 
+}
+function handleAnswerPageClick() {
+  $('.js-card').on('click', '#answer-page-button', event => {
+    event.preventDefault();
+    if(STORE.currentQuestion + 1 < STORE.questions.length){
+      STORE.currentQuestion++;
+      renderQuestion(STORE.currentQuestion);
+    } else {
+      renderEnd();
+    }
+  });
+}
 
 function start(){
-  //renderMainPage();
-  renderScore();
-  renderQuestion(0);
-  // renderAnswer()
-  // renderEnd()
+  renderMainPage();
+  //event handlers
+  handleSubmitQuestionClick();
+  handleAnswerPageClick();
 }
 
 $(start)
