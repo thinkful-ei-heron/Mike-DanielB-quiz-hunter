@@ -2,12 +2,30 @@
 const STORE = {
   questions: [  
     { 
-      question: "first question",
-      answers: ["ans1", "ans2", "ans3", "ans4"],
-      correctAnswer: 1
+      question: "What monster was the featured monster for the release of Monster Hunter World?",
+      answers: ["Vespoid", "Kelbi", "Nergigante", "Raphinos"],
+      correctAnswer: "Nergigante"
+    },
+    { 
+      question: "Which monster was part of the Witcher crossover?",
+      answers: ["Ancient Leshen", "Pukei-Pukei", "Tobi-Kadachi", "Lavasoith"],
+      correctAnswer: "Ancient Leshen" 
+    },
+    { 
+      question: "Which brute wyvern is noted for having a huge crown atop its skull?",
+      answers: ["Rathalos", "Barroth", "Lunastra", "Great Girros"],
+      correctAnswer: "Barroth"
+    },
+    { 
+      question: "Which agile monster resembles a unicorn that can shoot lightning from its horn?",
+      answers: ["Kirin", "Diablos", "Vaal Hazak", "Xeno'jiva"],
+      correctAnswer: "Kirin"
+    },
+    { 
+      question: "Which monster is covered in a golden mantel?",
+      answers: ["Radobaan", "Kulve Taroth", "Odogaron", "Legiana"],
+      correctAnswer: "Kulve Taroth"
     }
-    //need ten+ questions
-
   ],
   currentQuestion: 0,
   score: 0
