@@ -12,6 +12,12 @@ body {
   background-position: center center;
 }
 
+.popin-mon {
+  width: 100vw;
+  position: absolute;
+  bottom: 40%;
+}
+
 main {
   position: fixed;
   text-align: center;
@@ -38,6 +44,8 @@ button {
 }
 
 .scorecard {
+  text-shadow: 0px 0px 3px black;
+  font-size: 15px;
   padding: calc(3px + .2vw);
 }
 
@@ -78,6 +86,7 @@ h1 {
 	font-size: calc(30px + 5vw);
 	color: white;
   margin: 2px;
+  text-shadow: 0px 0px 15px black;
 }
 
 .radio {

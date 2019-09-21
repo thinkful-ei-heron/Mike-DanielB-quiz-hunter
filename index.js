@@ -39,7 +39,8 @@ const testMode = true;
 
 function startPageBuilder(){
   //doesn't really need to be a function but likely to be big enough that we'll want it out of the way
-  return `<p>Are you looking to find your Hunter Rank?</p>
+  return `<p>As a hunter, you'r skilled at hunting monsters in a variety of habitats. But every high ranking hunter knows that knowledge is key.</p>
+  <p>Its time to find YOUR hunter rank!</p>
   <button id='start-button'>HUNT</button>`;
 }
 
