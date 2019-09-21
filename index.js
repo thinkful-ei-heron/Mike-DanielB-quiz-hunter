@@ -3,15 +3,15 @@ function questionBuilder(num){ //build HTML from question
   let q = STORE.questions[num]
   let html = `<form>
     <fieldset>
-      <li>question: ${q.question}</li>`
+      <li>${q.question}</li>`
   for (let i = 0; i < q.answers.length; i++){
     html = html.concat(`  <label class="answer" for="">
     <input class="radio" type="radio" id="ans${i}" value="${q.answers[i]}" name="ans" required>
-    <span>${q.answers[i]}</span>
+    <span class="js-answer-choices">${q.answers[i]}</span>
   </label>`);
   }
   html = html.concat(`
-    <button id='submit-question'>Submit Button Placeholder</button>
+    <button id='submit-question'>SUBMIT</button>
   </fieldset>
 </form>`);
   return html;
@@ -29,7 +29,7 @@ function renderQuestion(num){
   let html = questionBuilder(num);
   //console.log(html);
   $('.card').html(html);
-  $('.js-questionNum').text(`Question ${num + 1} of ${STORE.questions.length}`);
+  $('.js-questionNum').text(`${num + 1} of ${STORE.questions.length}`);
   renderScore();
 }
 

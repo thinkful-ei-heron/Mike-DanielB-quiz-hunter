@@ -18,15 +18,29 @@ main {
 }
 header {
   padding: 0px;
-  margin: 0px;
+  margin: 10px;
 }
 
 button {
   display: block;
+  font-family: monster_hunterregular;
+  font-size: 30px;
+  background: url(images/bg.jpg);
+  color: red;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
 }
-
+fieldset {
+  border: none;
+}
 .card {
+  border: 1px solid white;
+  box-shadow 100px 100px 50px black;
   background: grey;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 .answer {
@@ -54,5 +68,12 @@ input{
   text-size: 20px;
 }
 
-span {
+.js-answer-choices {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 10px;
+  font-family: 'Crimson Text', serif;
+  color: light grey;
+  font-size: calc(1vw +.5vw);
 }
+
