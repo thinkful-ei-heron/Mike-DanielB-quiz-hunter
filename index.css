@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
 @font-face {
     font-family: 'monster_hunterregular';
     src: url('font/monster_hunter.woff2') format('woff2'),
@@ -5,54 +6,97 @@
     font-weight: normal;
     font-style: normal;
 }
-@import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
+
 body {
-  background: url(images/bg.jpg)
+  background: url(images/bg.jpg);
+  background-position: center center;
 }
+
 main {
   position: fixed;
   text-align: center;
+  width: 75%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 header {
   padding: 0px;
   margin: 0px;
 }
 
 button {
+  font-family: 'monster_hunterregular';
+  font-size: 20px;
   display: block;
+  padding: 10px;
+  color: red;
+  background-color: black;
+  background-image: url(/images/mon.png);
+  margin: 10px auto 5px auto;
+}
+
+.scorecard {
+  padding: calc(3px + .2vw);
 }
 
 .card {
-  background: grey;
+  background: #302423;
+  padding: 0px;
+  padding-bottom: 10px;
+}
+
+fieldset {
+  border: none;
 }
 
 .answer {
   font-family: 'Crimson Text', serif;
   display: block;
 }
+.option {
+ font-size: calc(11px + .5vw); 
+ color: white;
+}
 
-li {
+
+li, p {
   font-family: 'Crimson Text', serif;
-  font-size: calc(2vw + .5vw);
+  font-size: calc(11px + .5vw);
   display: inline;
   list-style: none;
 	color: white;
-  padding: 0px 20px 0px 20px;
+  padding: 10px 0px 10px 0px;
 }
 
 h1 {
   font-family: monster_hunterregular;
-	font-size: calc(7vw + .5vw);
+	font-size: calc(30px + 5vw);
 	color: white;
   margin: 2px;
 }
 
-input{
-  text-size: 20px;
+.radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	display: inline-block;
+	position: relative;
+	background-color: #201615;
+	color: #666;
+	top: 5px;
+	height: 20px;
+	width: 20px;
+	border: 1px solid red;
+	border-radius: 50px;
+	cursor: pointer;     
+	margin-right: 7px;
+	outline: none;
 }
-
-span {
+.radio:hover {
+     background-color: #690d17;
+}
+.radio:checked {
+     background-color: red;
 }

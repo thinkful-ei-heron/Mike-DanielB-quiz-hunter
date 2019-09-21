@@ -39,8 +39,8 @@ const testMode = true;
 
 function startPageBuilder(){
   //doesn't really need to be a function but likely to be big enough that we'll want it out of the way
-  return `<p>WIP start page</p>
-  <button id='start-button'>Begin Quiz</button>`;
+  return `<p>Are you looking to find your Hunter Rank?</p>
+  <button id='start-button'>HUNT</button>`;
 }
 
 function checkAnswer(ans){ //ans is full answer string
@@ -56,7 +56,7 @@ function answerBuilder(ans){
     html = `<p>FAILURE</p>
     <p>You answered ${ans} but the correct answer was ${STORE.questions[STORE.currentQuestion].correctAnswer}</p>`;
   }
-  html = html.concat(`<button id='answer-page-button'>${STORE.currentQuestion + 1 < STORE.questions.length ? 'Next Question' : 'Results'}</button>`);
+  html = html.concat(`<button id='answer-page-button'>${STORE.currentQuestion + 1 < STORE.questions.length ? 'HUNT' : 'Results'}</button>`);
   return html;
 }
 
@@ -64,15 +64,15 @@ function questionBuilder(){
   let q = STORE.questions[STORE.currentQuestion];
   let html = `<form id='question'>
     <fieldset>
-      <li>question: ${q.question}</li>`;
+      <li>${q.question}</li>`;
   for (let i = 0; i < q.answers.length; i++){
     html = html.concat(`  <label class="answer" for="">
     <input class="radio" type="radio" id="ans${i}" value="${q.answers[i]}" name="ans" required>
-    <span>${q.answers[i]}</span>
+    <span class="option">${q.answers[i]}</span>
   </label>`);
   }
   html = html.concat(`
-    <button id='submit-question'>Submit Question</button>
+    <button id='submit-question'>SUBMIT</button>
     ${testMode ? '<button id=\'test-skip\'>TEST: skip question</button>' : ''}
   </fieldset>
 </form>`); //TODO: don't forget to remove TEST button
@@ -97,7 +97,7 @@ function endPageBuilder(){
     html = html.concat('Worse than chance would suggest. Ouch.');
   }
 
-  html = html.concat('<button id=\'start-over\'>Start Over</button>');
+  html = html.concat('<button id=\'start-over\'>Hunt Again</button>');
   return html;
 }
 
@@ -108,8 +108,8 @@ function render(ans = ''){
     $('.js-questionNum').hide();
     $('.js-score').hide();
   } else {
-    $('.js-score').show().text(STORE.score);
-    $('.js-questionNum').show().text(`Question ${STORE.currentQuestion + 1} of ${STORE.questions.length}`);
+    $('.js-score').show().text(`Hunter Rank: ${STORE.score}`);
+    $('.js-questionNum').show().text(`Question: ${STORE.currentQuestion + 1} of ${STORE.questions.length}`);
   }
   switch(state){
   case 'start':
