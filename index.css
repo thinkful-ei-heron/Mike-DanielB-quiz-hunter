@@ -16,6 +16,7 @@ body {
   width: 100vw;
   position: absolute;
   bottom: 40%;
+  display: none;
 }
 
 main {
