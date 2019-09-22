@@ -139,13 +139,14 @@ function quizControl(answer = ''){
   case 'start':
     STORE.state = 'question';
     render();
-    fillMonsterPin()
     break;
   case 'question':
-    if(checkAnswer(answer)) STORE.score++;
+      if(checkAnswer(answer)) {
+        STORE.score++;
+        spawnMon(); //Spawn monster on right answers only
+      } 
     STORE.state = 'answer';
     render(answer);
-    spawnMon()
     break;
   case 'answer':
     ++STORE.currentQuestion < STORE.questions.length //prefix increment because we want the new value for comparison
@@ -153,6 +154,7 @@ function quizControl(answer = ''){
     render();
     break;
   case 'end':
+    fillMonsterPin();
     STORE.state = 'start';
     STORE.score = 0;
     STORE.currentQuestion = 0;
@@ -167,15 +169,16 @@ function quizControl(answer = ''){
 }
 
 function fillMonsterPin() {
-  let monsterPin = ['.diablos', '.rath', '.rathian', '.mon4']
-  monsterPin.forEach(x => $(x).fadeOut(''))
+  monsterPin = ['.diablos', '.rath', '.rathian', '.mon4']
+  monsterPin.forEach(x => $(x).animate({opacity: 0}));
+  console.log(monsterPin)
 }
 
 function spawnMon(){
   let activeMon = monsterPin.shift()
-  console.log(activeMon)
-  $(activeMon).fadeIn('')
-  
+  console.log({activeMon})
+//  monsterPin.forEach(x => $(x).animate({opacity: 0}));
+  $(activeMon).animate({opacity: 1}) 
 }
 
 function handleButtonClick(){
@@ -190,7 +193,7 @@ function handleButtonClick(){
       if (answer){ //if nothing selected, answer is undefined which is falsy
         quizControl(answer);
       } else {
-        document.getElementById('question').reportValidity(); //N.B. jQuery objects do not currently support reportValidity()
+//        document.getElementById('question').reportValidity(); //N.B. jQuery objects do not currently support reportValidity()
       }
     } else {
       quizControl();
