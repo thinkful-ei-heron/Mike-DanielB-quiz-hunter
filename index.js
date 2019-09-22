@@ -39,8 +39,8 @@ const testMode = true;
 
 function startPageBuilder(){
   //doesn't really need to be a function but likely to be big enough that we'll want it out of the way
-  return `<p>As a hunter, you'r skilled at hunting monsters in a variety of habitats. But every high ranking hunter knows that knowledge is key.</p>
-  <p>Its time to find YOUR hunter rank!</p>
+  return `<p>As a hunter, you may think you are purrfectly skilled at hunting monsters and crafting equipment. But every high ranking hunter knows that a hunter is only as good as their Palico! Well, Im here to see if you have what it takes to employ a feline of my purrowless!</p>
+  <p>Its time we find YOUR hunter rank!</p>
   <button id='start-button'>HUNT</button>`;
 }
 
@@ -52,10 +52,10 @@ function checkAnswer(ans){ //ans is full answer string
 function answerBuilder(ans){
   let html;
   if(checkAnswer(ans)){
-    html = '<p>YOU\'RE WINNER</p>';
+    html = '<p>That was purrfect!!! You just might have what it takes to employ me yet! Lets see if you can handle the next one!</p>';
   } else {
-    html = `<p>FAILURE</p>
-    <p>You answered ${ans} but the correct answer was ${STORE.questions[STORE.currentQuestion].correctAnswer}</p>`;
+    html = `<p>Are you even paying attention Hunter!?</p>
+    <p>${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.currentQuestion].correctAnswer}</p>`;
   }
   html = html.concat(`<button id='answer-page-button'>${STORE.currentQuestion + 1 < STORE.questions.length ? 'HUNT' : 'Results'}</button>`);
   return html;
@@ -83,19 +83,19 @@ function questionBuilder(){
 function endPageBuilder(){
   let score = STORE.score;
   let numQuestions = STORE.questions.length;
-  let html = `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-  <p>You correctly answered ${score} of ${numQuestions} questions</p>`;
+  let html = `
+  <p>The dust has settled in your epic quest for knowledge! Your weapons sharp, armor strong, your brain...
+  Meow, lets see here, you corectly answered ${score} of ${numQuestions} questions.</p>`;
   if (score === numQuestions){
-    html = html.concat('A perfect score!');
+    html = html.concat('<span class="score">"Puurfect! You are a G-Rank Hunter!</span>');
   } else if (score > numQuestions) {
     html = '<p>Nice try, cheater</p>';
   } else if (score >= numQuestions * .8){
-    html = html.concat('Good job');
+    html = html.concat('<p>Good job</p>');
   } else if (score >= numQuestions * .5){
-    html = html.concat('Not bad');
+    html = html.concat('<p>Not bad</p>');
   } else if (score < numQuestions * .25){
-    html = html.concat('Worse than chance would suggest. Ouch.');
+    html = html.concat('<p>Worse than chance would suggest. Ouch.</p>');
   }
 
   html = html.concat('<button id=\'start-over\'>Hunt Again</button>');

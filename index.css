@@ -57,6 +57,8 @@ button {
   margin: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-right: 5vw;
+  padding-left: 5vw;
 }
 
 fieldset {
@@ -88,6 +90,10 @@ h1 {
 	color: white;
   margin: 2px;
   text-shadow: 0px 0px 15px black;
+}
+
+.score {
+  color: red;
 }
 
 .radio {
