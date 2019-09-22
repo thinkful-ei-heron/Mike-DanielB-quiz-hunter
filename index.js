@@ -36,7 +36,7 @@
 // ]
 
 const testMode = true;
-let monsterPin = ['.diablos', '.rath', '.rathian', '.mon4']
+let monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5']
 function startPageBuilder(){
   //doesn't really need to be a function but likely to be big enough that we'll want it out of the way
   return `<p>As a hunter, you may think you are purrfectly skilled at hunting monsters and crafting equipment. But every high ranking hunter knows that a hunter is only as good as their Palico! Well, Im here to see if you have what it takes to employ a feline of my purrowless!</p>
@@ -100,7 +100,8 @@ function endPageBuilder(){
     html = html.concat(`<p> ...Meow thats not bad, maybe you can hire my brother.</p>
       <img class="cat" src="images/shirt-cat.png" alt="Dopey looking cat in floral shirt">`);
   } else if (score < numQuestions * .25){
-    html = html.concat('<p> Ouch! you better focus on your research and less on the tasty meat!.</p>');
+    html = html.concat(`<p> Ouch! you better focus on your research and less on the tasty meat!.</p> 
+      <img class="cat" src="images/pal-fly.png" alt="funny looking cat in butterfly costume">`);
   }
 
   html = html.concat('<button id=\'start-over\'>Hunt Again</button>');
@@ -169,7 +170,7 @@ function quizControl(answer = ''){
 }
 
 function fillMonsterPin() {
-  monsterPin = ['.diablos', '.rath', '.rathian', '.mon4']
+  monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5'] 
   monsterPin.forEach(x => $(x).animate({opacity: 0}));
   console.log(monsterPin)
 }

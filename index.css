@@ -25,17 +25,30 @@ body {
 }
 
 .rath {
-  right: 50px;
+  right: 10%;
   top: -10%;
 }
 
+.diablos {
+  left: -10%;
+  top: -20%;
+
+}
+
 .rathian {
-  left: 30%;
-  top: -10%;
+  left: 20%;
+  top: -40%;
 }
 
 .mon4 {
  right: 0%; 
+ top: -15%;
+}
+
+.mon5 {
+  top: -20%;
+  left: 20%;
+
 }
 
 main {
