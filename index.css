@@ -1,3 +1,8 @@
+:root {
+  --rust: #201615;
+  --darkishred: #690d17;
+  --monred: #B80000;
+}
 @import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
 @font-face {
     font-family: 'monster_hunterregular';
@@ -38,10 +43,15 @@ button {
   font-size: 20px;
   display: block;
   padding: 10px;
-  color: red;
+  color: var(--monred);
+  border: 1px solid var(--monred);
   background-color: black;
   background-image: url(/images/mon.png);
   margin: 10px auto 5px auto;
+}
+button:hover {
+  color: black;
+  background-color: var(--darkishred);
 }
 
 .scorecard {
@@ -93,7 +103,8 @@ h1 {
 }
 
 .score {
-  color: red;
+  color: var(--monred);
+  display: block;
 }
 
 .radio {
@@ -107,15 +118,15 @@ h1 {
 	top: 5px;
 	height: 20px;
 	width: 20px;
-	border: 1px solid red;
+	border: 1px solid var(--monred);
 	border-radius: 50px;
 	cursor: pointer;     
 	margin-right: 7px;
 	outline: none;
 }
 .radio:hover {
-     background-color: #690d17;
+     background-color: var(--darkishred);
 }
 .radio:checked {
-     background-color: red;
+     background-color: var(--monred);
 }

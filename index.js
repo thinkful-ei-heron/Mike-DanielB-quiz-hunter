@@ -91,11 +91,11 @@ function endPageBuilder(){
   } else if (score > numQuestions) {
     html = '<p>Nice try, cheater</p>';
   } else if (score >= numQuestions * .8){
-    html = html.concat('<p>Good job</p>');
+    html = html.concat('<p> Your not bad, with some work I might be able to make you a certified G-Rank Hunter.</p>');
   } else if (score >= numQuestions * .5){
-    html = html.concat('<p>Not bad</p>');
+    html = html.concat('<p> ...Meow thats not bad, maybe you can hire my brother.</p>');
   } else if (score < numQuestions * .25){
-    html = html.concat('<p>Worse than chance would suggest. Ouch.</p>');
+    html = html.concat('<p> Ouch your a couple teeth short of a Taroth\'s Blaze. You have lots of hunting yet to do kid.</p>');
   }
 
   html = html.concat('<button id=\'start-over\'>Hunt Again</button>');
