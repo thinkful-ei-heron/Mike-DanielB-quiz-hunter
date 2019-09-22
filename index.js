@@ -36,11 +36,12 @@
 // ]
 
 const testMode = true;
-
+let monsterPin = ['.diablos', '.rath', '.rathian', '.mon4']
 function startPageBuilder(){
   //doesn't really need to be a function but likely to be big enough that we'll want it out of the way
   return `<p>As a hunter, you may think you are purrfectly skilled at hunting monsters and crafting equipment. But every high ranking hunter knows that a hunter is only as good as their Palico! Well, Im here to see if you have what it takes to employ a feline of my purrowless!</p>
   <p>Its time we find YOUR hunter rank!</p>
+  <img class="cat" src="images/cat1.png" alt="palico in leather armor">
   <button id='start-button'>HUNT</button>`;
 }
 
@@ -52,10 +53,12 @@ function checkAnswer(ans){ //ans is full answer string
 function answerBuilder(ans){
   let html;
   if(checkAnswer(ans)){
-    html = '<p>That was purrfect!!! You just might have what it takes to employ me yet! Lets see if you can handle the next one!</p>';
+    html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! Lets see if you can handle the next one!</p>
+            <img class="cat leather" src="images/nerg-cat.png" alt="palico in leather armor">`;
   } else {
     html = `<p>Are you even paying attention Hunter!?</p>
-    <p>${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.currentQuestion].correctAnswer}</p>`;
+    <p>${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.currentQuestion].correctAnswer}</p>
+      <img class="cat" src="images/disco-cat.png" alt="cat in a disco outfit!"> `;
   }
   html = html.concat(`<button id='answer-page-button'>${STORE.currentQuestion + 1 < STORE.questions.length ? 'HUNT' : 'Results'}</button>`);
   return html;
@@ -91,11 +94,13 @@ function endPageBuilder(){
   } else if (score > numQuestions) {
     html = '<p>Nice try, cheater</p>';
   } else if (score >= numQuestions * .8){
-    html = html.concat('<p> Your not bad, with some work I might be able to make you a certified G-Rank Hunter.</p>');
+    html = html.concat(`<p> Your not bad, with some work I might be able to make you a certified G-Rank Hunter.</p>
+      <img class="cat" src="images/shrug-cat.png" alt="">`);
   } else if (score >= numQuestions * .5){
-    html = html.concat('<p> ...Meow thats not bad, maybe you can hire my brother.</p>');
+    html = html.concat(`<p> ...Meow thats not bad, maybe you can hire my brother.</p>
+      <img class="cat" src="images/shirt-cat.png" alt="Dopey looking cat in floral shirt">`);
   } else if (score < numQuestions * .25){
-    html = html.concat('<p> Ouch your a couple teeth short of a Taroth\'s Blaze. You have lots of hunting yet to do kid.</p>');
+    html = html.concat('<p> Ouch! you better focus on your research and less on the tasty meat!.</p>');
   }
 
   html = html.concat('<button id=\'start-over\'>Hunt Again</button>');
@@ -134,11 +139,13 @@ function quizControl(answer = ''){
   case 'start':
     STORE.state = 'question';
     render();
+    fillMonsterPin()
     break;
   case 'question':
     if(checkAnswer(answer)) STORE.score++;
     STORE.state = 'answer';
     render(answer);
+    spawnMon()
     break;
   case 'answer':
     ++STORE.currentQuestion < STORE.questions.length //prefix increment because we want the new value for comparison
@@ -157,6 +164,18 @@ function quizControl(answer = ''){
     STORE.state = 'start';
     render();
   }
+}
+
+function fillMonsterPin() {
+  let monsterPin = ['.diablos', '.rath', '.rathian', '.mon4']
+  monsterPin.forEach(x => $(x).fadeOut(''))
+}
+
+function spawnMon(){
+  let activeMon = monsterPin.shift()
+  console.log(activeMon)
+  $(activeMon).fadeIn('')
+  
 }
 
 function handleButtonClick(){

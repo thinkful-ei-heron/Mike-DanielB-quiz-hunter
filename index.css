@@ -18,10 +18,24 @@ body {
 }
 
 .popin-mon {
-  width: 100vw;
-  position: absolute;
-  bottom: 40%;
   display: none;
+  width: 50%;
+  position: absolute;
+  top: 5%;
+}
+
+.rath {
+  right: 50px;
+  top: -10%;
+}
+
+.rathian {
+  left: 30%;
+  top: -10%;
+}
+
+.mon4 {
+ right: 0%; 
 }
 
 main {
@@ -49,6 +63,7 @@ button {
   background-image: url(/images/mon.png);
   margin: 10px auto 5px auto;
 }
+
 button:hover {
   color: black;
   background-color: var(--darkishred);
@@ -69,6 +84,12 @@ button:hover {
   padding-bottom: 10px;
   padding-right: 5vw;
   padding-left: 5vw;
+}
+
+.cat {
+  height: 30vh;
+  margin: 5px auto 5px auto;
+  display: block;
 }
 
 fieldset {
