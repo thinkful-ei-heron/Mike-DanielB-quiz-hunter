@@ -1,3 +1,5 @@
+Daniel Bright and Michael Kirsch quiz app
+
 ## TODO
 - ~~add cart <img> to the 0 out of 5 score card.~~
 - ~~photoshop the white haze out of images and increase contrast~~
