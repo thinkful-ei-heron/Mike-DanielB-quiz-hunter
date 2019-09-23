@@ -131,6 +131,10 @@ li, p {
   padding: 10px 0px 10px 0px;
 }
 
+p {
+  display: block;
+}
+
 h1 {
   font-family: monster_hunterregular;
 	font-size: calc(30px + 5vw);
