@@ -36,10 +36,19 @@ function questionBuilder(){
   let html = `<form id='question'>
     <fieldset>
       <li>${q.question}</li>`;
+  //to randomize order of answers, make an array [0, 1, ..., index of last question], then shuffle it
+  let rand = [];
   for (let i = 0; i < q.answers.length; i++){
-    html = html.concat(`  <label class="answer" for="">
-    <input class="radio" type="radio" id="ans${i}" value="${q.answers[i]}" name="ans" required>
-    <span class="option">${q.answers[i]}</span>
+    rand.push(i);
+  }
+  console.log(rand);
+  rand = shuffle(rand);
+  console.log(rand);
+  for (let i = 0; i < q.answers.length; i++){
+    let idx = rand[i]; 
+    html = html.concat(`  <label class="answer" for="ans${idx}">
+    <input class="radio" type="radio" id="ans${idx}" value="${q.answers[idx]}" name="ans" required>
+    <span class="option">${q.answers[idx]}</span>
   </label>`);
   }
   html = html.concat(`
@@ -47,6 +56,21 @@ function questionBuilder(){
   </fieldset>
 </form>`);
   return html;
+}
+
+function shuffle(arr){ //Fisher-Yates algorithm
+  let idx = arr.length;
+  let temp;
+  let randIdx;
+  while (0 < idx){ //if idx is 0 we end up working on arr[-1]
+    randIdx = Math.floor(Math.random() * idx); //pick a remaining element
+    idx--; 
+    //swap it with arr[idx]
+    temp = arr[idx];
+    arr[idx] = arr[randIdx];
+    arr[randIdx] = temp;
+  }
+  return arr;
 }
 
 function endPageBuilder(){
