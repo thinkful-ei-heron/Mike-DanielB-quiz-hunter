@@ -27,17 +27,20 @@ body {
 }
 
 .rath {
+  width: 40%;
   right: 10%;
   top: -10%;
 }
 
 .diablos {
-  left: -10%;
+  width: 40%;
+  left: -8%;
   top: -20%;
 
 }
 
 .rathian {
+  width: 30%;
   left: 20%;
   top: -40%;
 }
@@ -81,6 +84,10 @@ button {
 }
 
 button:hover {
+  color: black;
+  background-color: var(--darkishred);
+}
+button:focus {
   color: black;
   background-color: var(--darkishred);
 }
@@ -226,7 +233,7 @@ h1 {
 		top: 25%;
   }
 }
-@media screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 800px) {
+@media only screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 800px) {
   .popin-mon {
 		top: 10%;
   }
