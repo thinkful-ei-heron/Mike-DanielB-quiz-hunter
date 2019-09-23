@@ -233,8 +233,15 @@ h1 {
 		top: 25%;
   }
 }
+
 @media only screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 800px) {
   .popin-mon {
 		top: 10%;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .popin-mon {
+    display: none;
   }
 }

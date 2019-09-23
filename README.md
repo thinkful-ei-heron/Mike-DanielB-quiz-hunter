@@ -5,8 +5,8 @@
 - create media queries for sizes of monsters on page
 - ~~add 4th and 5th monster~~
 - ~~add image for 2 out of 5 score card~~
-- make the words attached to <input> radio activate the radio.
+- ~~make the words attached to <input> radio activate the radio.~~
 
 ## Stretch Goals
-- randomize questions
+- ~~randomize questions~~
 - animate monsters
