@@ -73,7 +73,7 @@ button {
   font-size: 20px;
   display: block;
   padding: 10px;
-  color: var(--monred);
+  color: red;
   border: 1px solid var(--monred);
   background-color: black;
   background-image: url(/images/mon.png);
