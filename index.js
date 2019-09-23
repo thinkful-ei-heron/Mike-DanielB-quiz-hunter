@@ -19,7 +19,7 @@ function checkAnswer(ans){ //ans is full answer string
 function answerBuilder(ans){
   let html;
   if(checkAnswer(ans)){
-    html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! Lets see if you can handle the next one!</p>
+    html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! ${STORE.currentQuestion + 1 < STORE.questions.length ? 'Lets see if you can handle the next one!' : ''}</p>
             <img class="cat leather" src="images/nerg-cat.png" alt="palico in leather armor">`;
   } else {
     html = `<p>Are you even paying attention Hunter!?</p>
@@ -41,9 +41,7 @@ function questionBuilder(){
   for (let i = 0; i < q.answers.length; i++){
     rand.push(i);
   }
-  console.log(rand);
   rand = shuffle(rand);
-  console.log(rand);
   for (let i = 0; i < q.answers.length; i++){
     let idx = rand[i]; 
     html = html.concat(`  <label class="answer" for="ans${idx}">
@@ -132,10 +130,10 @@ function quizControl(answer = ''){
     render();
     break;
   case 'question':
-      if(checkAnswer(answer)) {
-        STORE.score++;
-        spawnMon(); //Spawn monster on right answers only
-      } 
+    if(checkAnswer(answer)) {
+      STORE.score++;
+      spawnMon(); //Spawn monster on right answers only
+    } 
     STORE.state = 'answer';
     render(answer);
     break;
@@ -177,12 +175,8 @@ function handleButtonSubmit(){
     event.preventDefault();
     if (STORE.state === 'question'){
       let answer = $('.radio:checked').val();
-      //TODO: required doesn't seem to be working, workaround below
-      if (answer){ //if nothing selected, answer is undefined which is falsy
-        quizControl(answer);
-      } else {
-      //  document.getElementById('question').reportValidity(); //N.B. jQuery objects do not currently support reportValidity()
-      }
+      quizControl(answer);
+
     } else {
       quizControl();
     } 
