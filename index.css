@@ -136,7 +136,7 @@ h1 {
 	font-size: calc(30px + 5vw);
 	color: white;
   margin: 2px;
-  text-shadow: 0px 0px 15px black;
+  text-shadow: 1px 1px 5px black;
 }
 
 .score {
@@ -170,7 +170,7 @@ h1 {
      background-color: var(--monred);
 }
 
-@media (max-width: 700px){
+/*@media (max-width: 700px){
   .popin-mon {
     opacity: 0;
     width: 50%;
@@ -191,5 +191,39 @@ h1 {
   }
   .mon5 {
     left: 20%;
+  }
+}*/
+@media (max-width: 700px){
+  .popin-mon {
+    opacity: 0;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    -moz-top: 10%;
+  }
+  .rath {
+    right: 10%;
+  }
+  .diablos {
+    left: -10%;
+  }
+  .rathian {
+    left: 20%;
+  }
+  .mon4 {
+   right: 0%; 
+  }
+  .mon5 {
+    left: 20%;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 800px) {
+  .popin-mon {
+		top: 25%;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 800px) {
+  .popin-mon {
+		top: 10%;
   }
 }
