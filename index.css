@@ -3,6 +3,7 @@
   --darkishred: #690d17;
   --monred: #B80000;
 }
+
 @import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
 @font-face {
     font-family: 'monster_hunterregular';
@@ -11,11 +12,12 @@
     font-weight: normal;
     font-style: normal;
 }
+
 body {
   background: url(images/bg.jpg);
   background-position: center center;
 }
-
+/*=============MONSTER CALLS==============*/
 .popin-mon {
   opacity: 0;
   width: 50%;
@@ -49,6 +51,7 @@ body {
   left: 20%;
 
 }
+/*=================MONSTER END==============*/
 
 main {
   position: fixed;
@@ -112,6 +115,7 @@ fieldset {
   font-family: 'Crimson Text', serif;
   display: block;
 }
+
 .option {
  font-size: calc(11px + .5vw); 
  color: white;
@@ -157,12 +161,15 @@ h1 {
 	margin-right: 7px;
 	outline: none;
 }
+
 .radio:hover {
      background-color: var(--darkishred);
 }
+
 .radio:checked {
      background-color: var(--monred);
 }
+
 @media (max-width: 700px){
   .popin-mon {
     opacity: 0;
