@@ -1,7 +1,7 @@
 /*global STORE*/
 'use strict';
 
-let monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5']
+let monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5'];
 function startPageBuilder(){
   //doesn't really need to be a function but likely to be big enough that we'll want it out of the way
   return `<p>As a hunter, you may think you are purrfectly skilled at hunting monsters and crafting equipment. But every high ranking hunter knows that a hunter is only as good as their Palico! Well, Im here to see if you have what it takes to employ a feline of my purrowless!</p>
@@ -96,6 +96,8 @@ function endPageBuilder(){
   return html;
 }
 
+/* replace the entire content card html, and display progress if appropriate */
+
 function render(ans = ''){
   let html = '<p>something went wrong</p>';
   const state = STORE.state;
@@ -123,13 +125,19 @@ function render(ans = ''){
   $('.card').html(html);
 }
 
+/* main control flow logic, called when button pressed
+ * state flow: start -> question -> answer -> [back to question if there are more, else end]
+ * end -> start
+ */
+
 function quizControl(answer = ''){
   switch(STORE.state){
-  case 'start':
+  case 'start': //quiz start button
     STORE.state = 'question';
+    STORE.questionOrder = shuffle(STORE.questionOrder); //randomize question order when quiz begins
     render();
     break;
-  case 'question':
+  case 'question': //submit answer button
     if(checkAnswer(answer)) {
       STORE.score++;
       spawnMon(); //Spawn monster on right answers only
@@ -137,39 +145,41 @@ function quizControl(answer = ''){
     STORE.state = 'answer';
     render(answer);
     break;
-  case 'answer':
+  case 'answer': //next question/end page button
     ++STORE.currentQuestion < STORE.questions.length //prefix increment because we want the new value for comparison
-      ? STORE.state = 'question' : STORE.state = 'end';
+      ? STORE.state = 'question' : STORE.state = 'end'; //checking if there are more questions to ask
     render();
     break;
-  case 'end':
+  case 'end': //start over button
     fillMonsterPin();
     STORE.state = 'start';
     STORE.score = 0;
     STORE.currentQuestion = 0;
-    STORE.questionOrder = shuffle(STORE.questionOrder);
     render();
     break;
   default:
     // eslint-disable-next-line no-console
     console.error('invalid state, restarting');
+    fillMonsterPin();
     STORE.state = 'start';
+    STORE.score = 0;
+    STORE.currentQuestion = 0;
     render();
   }
 }
 
 function fillMonsterPin() {
-  monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5'] 
-  monsterPin = shuffle(monsterPin)
+  monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5'];
+  monsterPin = shuffle(monsterPin);
   monsterPin.forEach(x => $(x).animate({opacity: 0}));
-  console.log(monsterPin)
+  // console.log(monsterPin)
 }
 
 function spawnMon(){
-  let activeMon = monsterPin.shift()
-  console.log({activeMon})
-//  monsterPin.forEach(x => $(x).animate({opacity: 0}));
-  $(activeMon).animate({opacity: 1}) 
+  let activeMon = monsterPin.shift();
+  // console.log({activeMon})
+  // monsterPin.forEach(x => $(x).animate({opacity: 0}));
+  $(activeMon).animate({opacity: 1});
 }
 
 function handleButtonSubmit(){
@@ -189,12 +199,10 @@ function handleButtonSubmit(){
 function start(){
   render(); //render start page
   handleButtonSubmit(); //event handler
-  //randomize question order:
+  //initialize question order array (will be randomized on start)
   for(let i = 0; i < STORE.questions.length; i++){
     STORE.questionOrder.push(i);
   }
-  STORE.questionOrder = shuffle(STORE.questionOrder);
-
 }
 
 $(start);
