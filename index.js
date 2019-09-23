@@ -18,16 +18,16 @@ function checkAnswer(ans){ //ans is full answer string
 
 function answerBuilder(ans){
   let html;
+  let moreQuestions = STORE.currentQuestion + 1 < STORE.questions.length;
   if(checkAnswer(ans)){
-    html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! Lets see if you can handle the next one!</p>
+    html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! ${moreQuestions ? 'Let\'s see if you can handle the next one!' : '</p><p>Let\'s take a look at how you did.'}</p>
             <img class="cat leather" src="images/nerg-cat.png" alt="palico in leather armor">`;
   } else {
-    html = `<p>Are you even paying attention Hunter!?</p>
-    <p>${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.currentQuestion].correctAnswer}</p>
+    html = `<p>Are you even paying attention Hunter!? ${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.currentQuestion].correctAnswer}.  ${moreQuestions ? 'Maybe you can redeem yourself on the next question.' : '</p><p>Let\'s take a look at how you did.'}</p>
       <img class="cat" src="images/disco-cat.png" alt="cat in a disco outfit!"> `;
   }
   //empty form to let submit work
-  html = html.concat(`<form id='foo'></form><button id='answer-page-button' form='foo'>${STORE.currentQuestion + 1 < STORE.questions.length ? 'HUNT' : 'Results'}</button>`); 
+  html = html.concat(`<form id='foo'></form><button id='answer-page-button' form='foo'>${moreQuestions ? 'HUNT' : 'Results'}</button>`); 
   return html;
 }
 
@@ -41,9 +41,7 @@ function questionBuilder(){
   for (let i = 0; i < q.answers.length; i++){
     rand.push(i);
   }
-  console.log(rand);
   rand = shuffle(rand);
-  console.log(rand);
   for (let i = 0; i < q.answers.length; i++){
     let idx = rand[i]; 
     html = html.concat(`  <label class="answer" for="ans${idx}">
@@ -90,7 +88,7 @@ function endPageBuilder(){
     html = html.concat(`<p> ...Meow thats not bad, maybe you can hire my brother.</p>
       <img class="cat" src="images/shirt-cat.png" alt="Dopey looking cat in floral shirt">`);
   } else if (score < numQuestions * .25){
-    html = html.concat(`<p> Ouch! you better focus on your research and less on the tasty meat!.</p> 
+    html = html.concat(`<p> Ouch! You better focus on your research and less on the tasty meat!.</p> 
       <img class="cat" src="images/pal-fly.png" alt="funny looking cat in butterfly costume">`);
   }
 
@@ -132,10 +130,10 @@ function quizControl(answer = ''){
     render();
     break;
   case 'question':
-      if(checkAnswer(answer)) {
-        STORE.score++;
-        spawnMon(); //Spawn monster on right answers only
-      } 
+    if(checkAnswer(answer)) {
+      STORE.score++;
+      spawnMon(); //Spawn monster on right answers only
+    } 
     STORE.state = 'answer';
     render(answer);
     break;
@@ -177,12 +175,8 @@ function handleButtonSubmit(){
     event.preventDefault();
     if (STORE.state === 'question'){
       let answer = $('.radio:checked').val();
-      //TODO: required doesn't seem to be working, workaround below
-      if (answer){ //if nothing selected, answer is undefined which is falsy
-        quizControl(answer);
-      } else {
-      //  document.getElementById('question').reportValidity(); //N.B. jQuery objects do not currently support reportValidity()
-      }
+      quizControl(answer);
+
     } else {
       quizControl();
     } 
