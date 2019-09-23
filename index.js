@@ -12,7 +12,7 @@ function startPageBuilder(){
 }
 
 function checkAnswer(ans){ //ans is full answer string
-  let q = STORE.questions[STORE.currentQuestion];
+  let q = STORE.questions[STORE.questionOrder[STORE.currentQuestion]];
   return ans === q.correctAnswer;
 }
 
@@ -23,7 +23,7 @@ function answerBuilder(ans){
     html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! ${moreQuestions ? 'Let\'s see if you can handle the next one!' : '</p><p>Let\'s take a look at how you did.'}</p>
             <img class="cat leather" src="images/nerg-cat.png" alt="palico in leather armor">`;
   } else {
-    html = `<p>Are you even paying attention Hunter!? ${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.currentQuestion].correctAnswer}.  ${moreQuestions ? 'Maybe you can redeem yourself on the next question.' : '</p><p>Let\'s take a look at how you did.'}</p>
+    html = `<p>Are you even paying attention Hunter!? ${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.questionOrder[STORE.currentQuestion]].correctAnswer}.  ${moreQuestions ? 'Maybe you can redeem yourself on the next question.' : '</p><p>Let\'s take a look at how you did.'}</p>
       <img class="cat" src="images/disco-cat.png" alt="cat in a disco outfit!"> `;
   }
   //empty form to let submit work
@@ -32,7 +32,7 @@ function answerBuilder(ans){
 }
 
 function questionBuilder(){
-  let q = STORE.questions[STORE.currentQuestion];
+  let q = STORE.questions[STORE.questionOrder[STORE.currentQuestion]];
   let html = `<form id='question'>
     <fieldset>
       <li>${q.question}</li>`;
@@ -100,11 +100,11 @@ function render(ans = ''){
   let html = '<p>something went wrong</p>';
   const state = STORE.state;
   if ('end' === state || 'start' === state){
-    $('.js-questionNum').hide();
-    $('.js-score').hide();
+    $('.js-questionNum').text('');
+    $('.js-score').text('');
   } else {
-    $('.js-score').show().text(`Hunter Rank: ${STORE.score}`);
-    $('.js-questionNum').show().text(`Question: ${STORE.currentQuestion + 1} of ${STORE.questions.length}`);
+    $('.js-score').text(`Hunter Rank: ${STORE.score}`);
+    $('.js-questionNum').text(`Question: ${STORE.currentQuestion + 1} of ${STORE.questions.length}`);
   }
   switch(state){
   case 'start':
@@ -187,6 +187,12 @@ function handleButtonSubmit(){
 function start(){
   render(); //render start page
   handleButtonSubmit(); //event handler
+  //randomize question order:
+  for(let i = 0; i < STORE.questions.length; i++){
+    STORE.questionOrder.push(i);
+  }
+  STORE.questionOrder = shuffle(STORE.questionOrder);
+
 }
 
 $(start);
