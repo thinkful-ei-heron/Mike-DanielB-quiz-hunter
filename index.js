@@ -147,6 +147,7 @@ function quizControl(answer = ''){
     STORE.state = 'start';
     STORE.score = 0;
     STORE.currentQuestion = 0;
+    STORE.questionOrder = shuffle(STORE.questionOrder);
     render();
     break;
   default:
@@ -159,6 +160,7 @@ function quizControl(answer = ''){
 
 function fillMonsterPin() {
   monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5'] 
+  monsterPin = shuffle(monsterPin)
   monsterPin.forEach(x => $(x).animate({opacity: 0}));
   console.log(monsterPin)
 }
