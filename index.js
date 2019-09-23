@@ -1,30 +1,14 @@
+/*global STORE*/
 'use strict';
-function questionBuilder(num){ //build HTML from question
-  let q = STORE.questions[num]
-  let html = `<form>
-    <fieldset>
-      <li>question: ${q.question}</li>`
-  for (let i = 0; i < q.answers.length; i++){
-    html = html.concat(`  <label class="answer" for="">
-    <input class="radio" type="radio" id="ans${i}" value="${q.answers[i]}" name="ans" required>
-    <span>${q.answers[i]}</span>
-  </label>`);
-  }
-  html = html.concat(`
-    <button id='submit-question'>Submit Button Placeholder</button>
-  </fieldset>
-</form>`);
-  return html;
-}
 
-const testMode = true;
 let monsterPin = ['.mon4', '.diablos', '.rath', '.rathian', '.mon5']
 function startPageBuilder(){
   //doesn't really need to be a function but likely to be big enough that we'll want it out of the way
   return `<p>As a hunter, you may think you are purrfectly skilled at hunting monsters and crafting equipment. But every high ranking hunter knows that a hunter is only as good as their Palico! Well, Im here to see if you have what it takes to employ a feline of my purrowless!</p>
   <p>Its time we find YOUR hunter rank!</p>
   <img class="cat" src="images/cat1.png" alt="palico in leather armor">
-  <button id='start-button'>HUNT</button>`;
+  <form id='foo'></form>
+  <button id='start-button' form='foo'>HUNT</button>`; //have to attach the button to a form for submit to work if we can't use on('click')
 }
 
 function checkAnswer(ans){ //ans is full answer string
@@ -42,7 +26,8 @@ function answerBuilder(ans){
     <p>${ans}?! Every G-Rank Hunter knows it was supposed to be ${STORE.questions[STORE.currentQuestion].correctAnswer}</p>
       <img class="cat" src="images/disco-cat.png" alt="cat in a disco outfit!"> `;
   }
-  html = html.concat(`<button id='answer-page-button'>${STORE.currentQuestion + 1 < STORE.questions.length ? 'HUNT' : 'Results'}</button>`);
+  //empty form to let submit work
+  html = html.concat(`<form id='foo'></form><button id='answer-page-button' form='foo'>${STORE.currentQuestion + 1 < STORE.questions.length ? 'HUNT' : 'Results'}</button>`); 
   return html;
 }
 
@@ -59,9 +44,8 @@ function questionBuilder(){
   }
   html = html.concat(`
     <button id='submit-question'>SUBMIT</button>
-    ${testMode ? '<button id=\'test-skip\'>TEST: skip question</button>' : ''}
   </fieldset>
-</form>`); //TODO: don't forget to remove TEST button
+</form>`);
   return html;
 }
 
@@ -164,29 +148,27 @@ function spawnMon(){
   $(activeMon).animate({opacity: 1}) 
 }
 
-function handleButtonClick(){
-  $('.js-card').on('click', 'button', event => {
+function handleButtonSubmit(){
+  $('.js-card').on('submit', '*', event => {
     event.preventDefault();
     if (STORE.state === 'question'){
-      if (testMode && event.target.id === 'test-skip'){ //TODO: don't forget to remove
-        quizControl(STORE.questions[STORE.currentQuestion].correctAnswer);
-      }
       let answer = $('.radio:checked').val();
       //TODO: required doesn't seem to be working, workaround below
       if (answer){ //if nothing selected, answer is undefined which is falsy
         quizControl(answer);
       } else {
-//        document.getElementById('question').reportValidity(); //N.B. jQuery objects do not currently support reportValidity()
+      //  document.getElementById('question').reportValidity(); //N.B. jQuery objects do not currently support reportValidity()
       }
     } else {
       quizControl();
     } 
+    return false;
   });
 }
 
 function start(){
   render(); //render start page
-  handleButtonClick(); //event handler
+  handleButtonSubmit(); //event handler
 }
 
 $(start);
