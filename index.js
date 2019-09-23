@@ -60,7 +60,7 @@ function endPageBuilder(){
   } else if (score > numQuestions) {
     html = '<p>Nice try, cheater</p>';
   } else if (score >= numQuestions * .8){
-    html = html.concat(`<p> Your not bad, with some work I might be able to make you a certified G-Rank Hunter.</p>
+    html = html.concat(`<p> You're not bad, with some work I might be able to make you a certified G-Rank Hunter.</p>
       <img class="cat" src="images/shrug-cat.png" alt="">`);
   } else if (score >= numQuestions * .5){
     html = html.concat(`<p> ...Meow thats not bad, maybe you can hire my brother.</p>
@@ -70,7 +70,7 @@ function endPageBuilder(){
       <img class="cat" src="images/pal-fly.png" alt="funny looking cat in butterfly costume">`);
   }
 
-  html = html.concat('<button id=\'start-over\'>Hunt Again</button>');
+  html = html.concat('<form id=\'foo\'><button id=\'start-over\' form=\'foo\'>Hunt Again</button>');
   return html;
 }
 
