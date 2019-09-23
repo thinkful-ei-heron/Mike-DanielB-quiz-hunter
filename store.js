@@ -30,6 +30,7 @@ const STORE = {
     }
   ],
   currentQuestion: 0,
+  questionOrder: [],
   score: 0,
   state: 'start' //valid values: 'start' for the start view, 'question' for a question view, 'answer' for an answer view, 'end' for final view
   //maybe should use enum?
