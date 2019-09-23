@@ -19,7 +19,7 @@ function checkAnswer(ans){ //ans is full answer string
 function answerBuilder(ans){
   let html;
   if(checkAnswer(ans)){
-    html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! ${STORE.currentQuestion + 1 < STORE.questions.length ? 'Lets see if you can handle the next one!' : ''}</p>
+    html = `<p>That was purrfect!!! You just might have what it takes to employ me yet! ${STORE.currentQuestion + 1 < STORE.questions.length ? 'Let\'s see if you can handle the next one!' : 'Let\'s take a look at how you did.'}</p>
             <img class="cat leather" src="images/nerg-cat.png" alt="palico in leather armor">`;
   } else {
     html = `<p>Are you even paying attention Hunter!?</p>
