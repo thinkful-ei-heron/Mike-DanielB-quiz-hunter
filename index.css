@@ -46,7 +46,7 @@ body {
 }
 
 .mon4 {
- right: 0%; 
+ right: 0%;
  top: -15%;
 }
 
@@ -121,22 +121,25 @@ fieldset {
 
 .answer {
   font-family: 'Crimson Text', serif;
-  display: block;
+  display: inline-block;
+  margin-right: 15px;
 }
 
 .option {
- font-size: calc(11px + .5vw); 
+ font-size: calc(11px + .5vw);
  color: white;
 }
 
-
-li, p {
+h2, li, p, legend {
   font-family: 'Crimson Text', serif;
   font-size: calc(11px + .5vw);
   display: inline;
   list-style: none;
 	color: white;
   padding: 10px 0px 10px 0px;
+}
+h2 {
+  font-weight: normal;
 }
 
 h1 {
@@ -165,9 +168,9 @@ h1 {
 	width: 20px;
 	border: 1px solid var(--monred);
 	border-radius: 50px;
-	cursor: pointer;     
-	margin-right: 7px;
-	outline: none;
+	cursor: pointer;
+	margin: 0 3px 0 0;
+  outline: none;
 }
 
 .radio:hover {
@@ -198,7 +201,7 @@ h1 {
     left: 20%;
   }
   .mon4 {
-   right: 0%; 
+   right: 0%;
   }
   .mon5 {
     left: 20%;
@@ -222,10 +225,14 @@ h1 {
     left: 20%;
   }
   .mon4 {
-   right: 0%; 
+   right: 0%;
   }
   .mon5 {
     left: 20%;
+  }
+  .answer {
+  display: block;
+  text-align: left;
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 800px) {

@@ -27,7 +27,7 @@ function answerBuilder(ans){
       <img class="cat" src="images/disco-cat.png" alt="cat in a disco outfit!"> `;
   }
   //empty form to let submit work
-  html = html.concat(`<form id='foo'></form><button id='answer-page-button' form='foo'>${moreQuestions ? 'HUNT' : 'Results'}</button>`); 
+  html = html.concat(`<form id='foo'></form><button id='answer-page-button' form='foo'>${moreQuestions ? 'HUNT' : 'Results'}</button>`);
   return html;
 }
 
@@ -35,7 +35,7 @@ function questionBuilder(){
   let q = STORE.questions[STORE.questionOrder[STORE.currentQuestion]];
   let html = `<form id='question'>
     <fieldset>
-      <li>${q.question}</li>`;
+      <legend>${q.question}</legend>`;
   //to randomize order of answers, make an array [0, 1, ..., index of last question], then shuffle it
   let rand = [];
   for (let i = 0; i < q.answers.length; i++){
@@ -43,15 +43,14 @@ function questionBuilder(){
   }
   rand = shuffle(rand);
   for (let i = 0; i < q.answers.length; i++){
-    let idx = rand[i]; 
+    let idx = rand[i];
     html = html.concat(`  <label class="answer" for="ans${idx}">
     <input class="radio" type="radio" id="ans${idx}" value="${q.answers[idx]}" name="ans" required>
     <span class="option">${q.answers[idx]}</span>
   </label>`);
   }
-  html = html.concat(`
+  html = html.concat(`</fieldset>
     <button id='submit-question'>SUBMIT</button>
-  </fieldset>
 </form>`);
   return html;
 }
@@ -62,7 +61,7 @@ function shuffle(arr){ //Fisher-Yates algorithm
   let randIdx;
   while (0 < idx){ //if idx is 0 we end up working on arr[-1]
     randIdx = Math.floor(Math.random() * idx); //pick a remaining element
-    idx--; 
+    idx--;
     //swap it with arr[idx]
     temp = arr[idx];
     arr[idx] = arr[randIdx];
@@ -76,7 +75,7 @@ function endPageBuilder(){
   let numQuestions = STORE.questions.length;
   let html = `
   <p>The dust has settled in your epic quest for knowledge! Your weapons sharp, armor strong, your brain...
-  Meow, lets see here, you corectly answered ${score} of ${numQuestions} questions.</p>`;
+  Meow, lets see here, you correctly answered ${score} of ${numQuestions} questions.</p>`;
   if (score === numQuestions){
     html = html.concat('<span class="score">"Puurfect! You are a G-Rank Hunter!</span>');
   } else if (score > numQuestions) {
@@ -88,7 +87,7 @@ function endPageBuilder(){
     html = html.concat(`<p> ...Meow thats not bad, maybe you can hire my brother.</p>
       <img class="cat" src="images/shirt-cat.png" alt="Dopey looking cat in floral shirt">`);
   } else if (score < numQuestions * .25){
-    html = html.concat(`<p> Ouch! You better focus on your research and less on the tasty meat!.</p> 
+    html = html.concat(`<p> Ouch! You better focus on your research and less on the tasty meat!.</p>
       <img class="cat" src="images/pal-fly.png" alt="funny looking cat in butterfly costume">`);
   }
 
@@ -119,7 +118,7 @@ function render(ans = ''){
     html = answerBuilder(ans);
     break;
   case 'end':
-    html = endPageBuilder();    
+    html = endPageBuilder();
   }
 
   $('.card').html(html);
@@ -141,7 +140,7 @@ function quizControl(answer = ''){
     if(checkAnswer(answer)) {
       STORE.score++;
       spawnMon(); //Spawn monster on right answers only
-    } 
+    }
     STORE.state = 'answer';
     render(answer);
     break;
@@ -191,7 +190,7 @@ function handleButtonSubmit(){
 
     } else {
       quizControl();
-    } 
+    }
     return false;
   });
 }
